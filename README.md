@@ -27,10 +27,30 @@ sqlite3 Chinook.db < Chinook_Sqlite.sql
 ```
 
 ## 环境变量配置
-创建 `.env` 文件并配置您的 OpenAI API 密钥：
+创建 `.env` 文件并根据您使用的模型配置相应的环境变量：
+
+### Azure OpenAI（默认）
+```env
+MODEL_TYPE=azure
+AZURE_OPENAI_API_KEY=your_api_key_here
+AZURE_OPENAI_ENDPOINT=your_endpoint_here
+AZURE_OPENAI_DEPLOYMENT_NAME=your_deployment_name
+AZURE_OPENAI_API_VERSION=2024-02-15-preview
 ```
+
+### OpenAI 兼容模型
+```env
+MODEL_TYPE=openai
 OPENAI_API_KEY=your_api_key_here
+OPENAI_API_BASE=https://api.example.com/v1  # 兼容模型的API地址
+MODEL_NAME=model_name  # 如：qwen-max 等
 ```
+
+## 支持的模型
+- Azure OpenAI (默认)
+- OpenAI
+- 通义千问
+- 其他 OpenAI 兼容接口的模型
 
 ## 项目结构
 ```
@@ -62,5 +82,6 @@ Chinook 数据库包含以下表：
 - Artist（艺术家信息）
 
 ## 注意事项
-- 请确保您的 OpenAI API 密钥有足够的额度
+- 请确保您的 API 密钥有足够的额度
 - 建议在测试阶段设置合理的 token 限制以控制成本
+- 不同模型的性能和成本可能有所不同，请根据实际需求选择
